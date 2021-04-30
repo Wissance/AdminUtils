@@ -1,10 +1,11 @@
 ### Description
-    This is a set of useful utils for administrating Windows and Linux PC's & Servers
-    All scripts were designed on our own taste therefor you could easily configure them on your own
+    This is a set of useful tools for administering Windows and Linux PC's & Servers
+    All scripts were designed on our own taste therefore you could easily configure them on your own
  
 ### Windows Administrating Tools
     Before use utils we should enable powershell script execution:
     ```
+    set-executionpolicy unrestricted
     ```
 
     This project have following utils:
