@@ -10,4 +10,5 @@
 
     This project have following utils:
     * install_common_tools.ps1 - powershell script for install bunch of commonly using (daily) sowfware
-    * install_development_tools.ps1 - tools that commonly used for software develop
+    * install_development_tools.ps1 - tools that commonly used for software develop (this script has one param - db password for postgres)
+      and shoul be invoked like ./install_development_tools.ps1 123
