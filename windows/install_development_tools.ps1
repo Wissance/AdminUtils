@@ -1,5 +1,5 @@
 # set execution policy that allows to download & install
-db_password = $args[0]
+$db_password = $args[0]
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 # install development software: python, go, ruby
 choco install golang -y
