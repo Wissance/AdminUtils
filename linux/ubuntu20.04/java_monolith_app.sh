@@ -1,10 +1,13 @@
 #!/bin/sh
 # This script MUST be run with sudo
+# args: $1 - keycloak install dir
 ########################################### VARIABLES #####################################
 JAVA_VERSION="18"
 JAVA_PKG="openjdk-$JAVA_VERSION-jdk"
 NODE_VERSION="16.x"
 NODE_URL="https://deb.nodesource.com/setup_$NODE_VERSION"
+KEYCLOAK_VERSION="19.0.3"
+KEYCLOAK_DOWNLOAD_URL="https://github.com/keycloak/keycloak/releases/download/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz"
 ###########################################################################################
 # 
 echo "*************** Welcome to Wissance (https://wissance.com) pure server installation for monolith Java app ***************"
@@ -33,7 +36,7 @@ echo "*************** DB Server: Postgresql installation finished **************
 echo "*************** Reverse proxy: Postgresql installation started ***************"
 apt-get install -y nginx
 # 4.2 KeyCloak
-wget https://github.com/keycloak/keycloak/releases/download/19.0.3/keycloak-19.0.3.tar.gz
+wget $KEYCLOAK_DOWNLOAD_URL
 tar -xf keycloak-19.0.3.tar.gz
 # 4.3 Elasticsearch
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -42,6 +45,12 @@ apt-get install elasticsearch
 systemctl enable elasticsearch
 systemctl start elasticsearch
 # 4.4 Certbot
+snap install core; sudo snap refresh core
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
+snap set certbot trust-plugin-with-root=ok
+snap install certbot-dns-digitalocean
+
 # 5. Configure installed servers
 # 5.1 PostgresSQL
 echo "*************** Please don't forget to give us a STAR on github: https://github.com/Wissance/AdminUtils and FOLLOW our organization ***************"
