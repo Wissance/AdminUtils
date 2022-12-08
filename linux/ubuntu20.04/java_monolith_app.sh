@@ -6,6 +6,7 @@ JAVA_VERSION="18"
 JAVA_PKG="openjdk-$JAVA_VERSION-jdk"
 NODE_VERSION="16.x"
 NODE_URL="https://deb.nodesource.com/setup_$NODE_VERSION"
+KEYCLOAK_INSTALL_DIR=$1
 KEYCLOAK_VERSION="19.0.3"
 KEYCLOAK_DOWNLOAD_URL="https://github.com/keycloak/keycloak/releases/download/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz"
 ###########################################################################################
@@ -36,6 +37,12 @@ echo "*************** DB Server: Postgresql installation finished **************
 echo "*************** Reverse proxy: Postgresql installation started ***************"
 apt-get install -y nginx
 # 4.2 KeyCloak
+if [ -z "$KEYCLOAK_INSTALL_DIR" ]
+then
+    $KEYCLOAK_INSTALL_DIR="/usr/local/sbin/keycloak"
+fi
+mkdir -p $KEYCLOAK_INSTALL_DIR
+cd $KEYCLOAK_INSTALL_DIR
 wget $KEYCLOAK_DOWNLOAD_URL
 tar -xf keycloak-19.0.3.tar.gz
 # 4.3 Elasticsearch
@@ -50,7 +57,7 @@ snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
 snap set certbot trust-plugin-with-root=ok
 snap install certbot-dns-digitalocean
-
 # 5. Configure installed servers
-# 5.1 PostgresSQL
+# 5.1 PostgresSQL password 4 postgre
+# 5.2 Minimal 4 kc (user, certs, & so on ....)
 echo "*************** Please don't forget to give us a STAR on github: https://github.com/Wissance/AdminUtils and FOLLOW our organization ***************"
