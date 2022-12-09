@@ -2,7 +2,7 @@
 # IMPORTANT NOTES: If you edit in any text editor ensure that ALL lines ends witn \n (LF) NOT a \r\n (CRLF),  
 # otherwise it won't work!
 # This script MUST be run with sudo
-# args: $1 - download install dir
+# args: $1 - download install dir or if missing default to /usr/local/sbin/keycloak
 # OS: Ubuntu 22.04 
 ########################################### VARIABLES #####################################
 CURRENT_DIRECTORY=$(pwd)
@@ -66,7 +66,8 @@ fi
 echo "******* Authorization Server: Keycloak installation finished *******"
 # 4.3 Elasticsearch
 echo "******* Search Engine Server: Elasticsearch installation started *******"
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 apt-get update
 apt-get install elasticsearch
 systemctl enable elasticsearch
