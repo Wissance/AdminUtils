@@ -5,10 +5,13 @@
 # args: $1 - download install dir or if missing default to /usr/local/sbin/keycloak
 # OS: Ubuntu 22.04 
 ########################################### VARIABLES #####################################
+# Variables that are responsible for colored output
 NOCOLOR='\033[0m'
 YELLOW='\033[33;1m'
 YELLOW_UNDERLINED='\033[33;4;1m'
 CYAN='\033[36;1m'
+MAGENTA='\033[35;1m'
+# Variables that are responsible for packages installation
 CURRENT_DIRECTORY=$(pwd)
 JAVA_VERSION="18"
 JAVA_PKG="openjdk-$JAVA_VERSION-jdk"
@@ -25,14 +28,14 @@ echo "##########################################################################
 echo "${CYAN}******* Backend: Java Development Kit installation started *******${NOCOLOR}"
 # todo(umv): think about java version parametrization
 add-apt-repository -y ppa:openjdk-r/ppa
-echo "Installing following JDK package(s): $JAVA_PKG"
+echo "${MAGENTA}Installing following JDK package(s): $JAVA_PKG ${NOCOLOR}"
 apt-get update
 apt-get install -y $JAVA_PKG
 echo "${CYAN}******* Backend: Java Development Kit installation finished *******${NOCOLOR}"
 echo "###################################################################################"
 # 2. Install NodeJs and npm
 echo "${CYAN}******* Frontend: NodeJS && Npm installation started *******${NOCOLOR}"
-echo "Installing NodeJs of version: $NODE_VERSION"
+echo "${MAGENTA}Installing NodeJs of version: $NODE_VERSION ${NOCOLOR}"
 curl -fsSL $NODE_URL | sudo -E bash -
 apt-get install -y nodejs
 apt-get install -y aptitude
