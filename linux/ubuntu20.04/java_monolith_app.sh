@@ -45,6 +45,7 @@ echo "******* Reverse proxy: Nginx installation started *******"
 apt-get install -y nginx
 echo "******* Reverse proxy: Nginx installation finished *******"
 # 4.2 KeyCloak
+echo "******* Authorization Server: Keycloak installation started *******"
 if [ -z "$KEYCLOAK_INSTALL_DIR" ] 
 then
     KEYCLOAK_INSTALL_DIR="/usr/local/sbin/keycloak"
@@ -60,12 +61,15 @@ then
 else
 	echo "Keycloak directory - \"$KEYCLOAK_INSTALL_DIR\" already exists, we assume that keycloak already installed"
 fi
+echo "******* Authorization Server: Keycloak installation finished *******"
 # 4.3 Elasticsearch
+echo "******* Search Engine Server: Elasticsearch installation started *******"
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 apt-get update
 apt-get install elasticsearch
 systemctl enable elasticsearch
 systemctl start elasticsearch
+echo "******* Search Engine Server: Elasticsearch installation finished *******"
 # 4.4 Certbot
 snap install core; snap refresh core
 snap install --classic certbot
