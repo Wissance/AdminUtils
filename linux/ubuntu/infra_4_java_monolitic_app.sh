@@ -38,6 +38,8 @@ echo "##########################################################################
 # 3. Install PosgtreSQL
 echo "******* DB Server: Postgresql installation started *******"
 apt-get install -y postgresql postgresql-contrib
+systemctl enable postgresql
+systemctl start postgresql
 echo "******* DB Server: Postgresql installation finished *******"
 # 4. Install Depending services
 # 4.1 Nginx
@@ -64,7 +66,7 @@ fi
 echo "******* Authorization Server: Keycloak installation finished *******"
 # 4.3 Elasticsearch
 echo "******* Search Engine Server: Elasticsearch installation started *******"
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 apt-get update
 apt-get install elasticsearch
 systemctl enable elasticsearch
