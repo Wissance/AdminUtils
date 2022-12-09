@@ -71,10 +71,12 @@ systemctl enable elasticsearch
 systemctl start elasticsearch
 echo "******* Search Engine Server: Elasticsearch installation finished *******"
 # 4.4 Certbot
+echo "******* SSL: Certbot installation started *******"
 snap install core; snap refresh core
 snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
 snap set certbot trust-plugin-with-root=ok
+echo "******* SSL: Certbot installation finished *******"
 # 5. Configure installed servers
 # 5.1 PostgresSQL password 4 postgre
 # 5.2 Minimal 4 kc (user, certs, & so on ....)
