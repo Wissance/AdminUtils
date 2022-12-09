@@ -5,6 +5,10 @@
 # args: $1 - download install dir or if missing default to /usr/local/sbin/keycloak
 # OS: Ubuntu 22.04 
 ########################################### VARIABLES #####################################
+NOCOLOR='\033[0m'
+YELLOW='\033[33;1m'
+YELLOW_UNDERLINED='\033[33;4;1m'
+CYAN='\033[36;1m'
 CURRENT_DIRECTORY=$(pwd)
 JAVA_VERSION="18"
 JAVA_PKG="openjdk-$JAVA_VERSION-jdk"
@@ -15,39 +19,41 @@ KEYCLOAK_VERSION="19.0.3"
 KEYCLOAK_ARCH_FILE="keycloak-$KEYCLOAK_VERSION.tar.gz"
 KEYCLOAK_DOWNLOAD_URL="https://github.com/keycloak/keycloak/releases/download/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz"
 ###########################################################################################
-echo "******* Welcome to Wissance (https://wissance.com) pure server installation for monolith Java app *******"
+echo "${YELLOW}******* Welcome to Wissance (https://wissance.com) pure server installation for monolith Java app *******${NOCOLOR}"
 echo "###################################################################################"
 # 1. Install Backend SDK Open JDK 18
-echo "******* Backend: Java Development Kit installation started *******"
+echo "${CYAN}******* Backend: Java Development Kit installation started *******${NOCOLOR}"
 # todo(umv): think about java version parametrization
 add-apt-repository -y ppa:openjdk-r/ppa
 echo "Installing following JDK package(s): $JAVA_PKG"
 apt-get update
 apt-get install -y $JAVA_PKG
-echo "******* Backend: Java Development Kit installation finished *******"
+echo "${CYAN}******* Backend: Java Development Kit installation finished *******${NOCOLOR}"
 echo "###################################################################################"
 # 2. Install NodeJs and npm
-echo "******* Frontend: NodeJS && Npm installation started *******"
+echo "${CYAN}******* Frontend: NodeJS && Npm installation started *******${NOCOLOR}"
 echo "Installing NodeJs of version: $NODE_VERSION"
 curl -fsSL $NODE_URL | sudo -E bash -
 apt-get install -y nodejs
 apt-get install -y aptitude
 # apt-get install -y npm ## cause error in ubuntu 22.04, however npm installs simultaneously with nodejs
-echo "******* Frontend: NodeJS && Npm installation finished *******"
+echo "${CYAN}******* Frontend: NodeJS && Npm installation finished *******${NOCOLOR}"
 echo "###################################################################################"
 # 3. Install PosgtreSQL
-echo "******* DB Server: Postgresql installation started *******"
+echo "${CYAN}******* DB Server: Postgresql installation started *******${NOCOLOR}"
 apt-get install -y postgresql postgresql-contrib
 systemctl enable postgresql
 systemctl start postgresql
-echo "******* DB Server: Postgresql installation finished *******"
+echo "${CYAN}******* DB Server: Postgresql installation finished *******${NOCOLOR}"
+echo "###################################################################################"
 # 4. Install Depending services
 # 4.1 Nginx
-echo "******* Reverse proxy: Nginx installation started *******"
+echo "******* Reverse proxy: Nginx installation started *******${NOCOLOR}"
 apt-get install -y nginx
-echo "******* Reverse proxy: Nginx installation finished *******"
+echo "${CYAN}******* Reverse proxy: Nginx installation finished *******${NOCOLOR}"
+echo "###################################################################################"
 # 4.2 KeyCloak
-echo "******* Authorization Server: Keycloak installation started *******"
+echo "${CYAN}******* Authorization Server: Keycloak installation started *******${NOCOLOR}"
 if [ -z "$KEYCLOAK_INSTALL_DIR" ] 
 then
     KEYCLOAK_INSTALL_DIR="/usr/local/sbin/keycloak"
@@ -63,7 +69,8 @@ then
 else
 	echo "Keycloak directory - \"$KEYCLOAK_INSTALL_DIR\" already exists, we assume that keycloak already installed"
 fi
-echo "******* Authorization Server: Keycloak installation finished *******"
+echo "${CYAN}******* Authorization Server: Keycloak installation finished *******${NOCOLOR}"
+echo "###################################################################################"
 # 4.3 Elasticsearch
 echo "******* Search Engine Server: Elasticsearch installation started *******"
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
@@ -72,15 +79,17 @@ apt-get update
 apt-get install elasticsearch
 systemctl enable elasticsearch
 systemctl start elasticsearch
-echo "******* Search Engine Server: Elasticsearch installation finished *******"
+echo "${CYAN}******* Search Engine Server: Elasticsearch installation finished *******${NOCOLOR}"
+echo "###################################################################################"
 # 4.4 Certbot
-echo "******* SSL: Certbot installation started *******"
+echo "${CYAN}******* SSL: Certbot installation started *******${NOCOLOR}"
 snap install core; snap refresh core
 snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
 snap set certbot trust-plugin-with-root=ok
-echo "******* SSL: Certbot installation finished *******"
+echo "${CYAN}******* SSL: Certbot installation finished *******${NOCOLOR}"
+echo "###################################################################################"
 # 5. Configure installed servers
 # 5.1 PostgresSQL password 4 postgre
 # 5.2 Minimal 4 kc (user, certs, & so on ....)
-echo "******* Please don't forget to give us a STAR on github: https://github.com/Wissance/AdminUtils and FOLLOW our organization *******"
+echo "${YELLOW}******* Please don't forget to give us a ${YELLOW_UNDERLINED} STAR on github: https://github.com/Wissance/AdminUtils ${NOCOLOR}${YELLOW} and FOLLOW our organization *******${NOCOLOR}"
