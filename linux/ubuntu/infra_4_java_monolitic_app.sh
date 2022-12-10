@@ -11,6 +11,7 @@ YELLOW='\033[33;1m'
 YELLOW_UNDERLINED='\033[33;4;1m'
 CYAN='\033[36;1m'
 MAGENTA='\033[35;1m'
+GREEN='\x1b[32;1m'
 # Variables that are responsible for packages installation
 CURRENT_DIRECTORY=$(pwd)
 JAVA_VERSION="18"
@@ -70,7 +71,7 @@ then
     tar -xf $KEYCLOAK_ARCH_FILE
 	cd $CURRENT_DIRECTORY
 else
-	echo "Keycloak directory - \"$KEYCLOAK_INSTALL_DIR\" already exists, we assume that keycloak already installed"
+	echo "${GREEN}Keycloak directory - \"$KEYCLOAK_INSTALL_DIR\" already exists, we assume that keycloak already installed.${NOCOLOR}"
 fi
 echo "${CYAN}******* Authorization Server: Keycloak installation finished *******${NOCOLOR}"
 echo "###################################################################################"
