@@ -30,34 +30,40 @@ Currently we have one script but it insignificant (work on it will be continued)
 ## 2. Windows Utilities
 This set of tool is located in the `windows` directory 
 Here we have the following tools for fast pure system initialization:
-* `/windows/install_common_tools.ps1` contains common (daily) software:
-   - chocolateygui
-   - 7zip
-   - adobereader
-   - foxitreader
-   - libreoffice-fresh
-   - firefox
-   - googlechrome
-   - notepadplusplus
-   - paint.net
-   - gimp
-   - putty
-   - winscp
-   - procexp
-   - procmon
-   - rufus
-* `/windows/install_development_tools.ps1` contains development tools for windows machine:
-   - golang
-   - python
-   - ruby
-   - postgresql13
-   - pgadmin4
-   - mysql
-   - mysql.workbench
-   - sqlite
-   - nssm
+* `/windows/install_common_tools.ps1` contains **common (daily) software**:
+   - `chocolateygui`
+   - `7zip`
+   - `adobereader`
+   - `foxitreader`
+   - `libreoffice-fresh`
+   - `firefox`
+   - `googlechrome`
+   - `notepadplusplus`
+   - `paint.net`
+   - `gimp`
+   - `putty`
+   - `winscp`
+   - `procexp`
+   - `procmon`
+   - `rufus`
+* `/windows/install_development_tools.ps1` contains **development tools for windows** machine:
+   - `golang`
+   - `python`
+   - `ruby`
+   - `postgresql13`
+   - `pgadmin4`
+   - `mysql`
+   - `mysql.workbench`
+   - `sqlite`
+   - `nssm`
    This script has one parameter (`$1`) that specify `Postgresql` password
    to set PostgreSql postgre user password to `123` run: `./install_development_tools.ps1 123` 
+* `/windows/install_engineering_tools.ps1` contains **development tools for elecric engineer (`pcb`, `simulation`, `logic`, `fpga`):
+   - `kicad` - PCB design
+   - `QElectroTech 0.90.7758` - tool that helps to draw schematics
+   - `SimulIDE` simulate electrical circuits work
+   - `Logisim Evolution 3.8.0` - digital logic simulator
+   - `Icarus Verilog 11.0` - verilog simulator
 **Before use utils we should enable powershell script execution**:
 ```ps1
 set-executionpolicy unrestricted
