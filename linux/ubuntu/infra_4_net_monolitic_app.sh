@@ -14,8 +14,8 @@ MAGENTA='\033[35;1m'
 GREEN='\x1b[32;1m'
 # Variables that are responsible for packages installation
 CURRENT_DIRECTORY=$(pwd)
-JAVA_VERSION="18"
-JAVA_PKG="openjdk-$JAVA_VERSION-jdk"
+NET_VERSION="6"
+NET_PKG="dotnet$NET_VERSION"
 NODE_VERSION="16.x"
 NODE_URL="https://deb.nodesource.com/setup_$NODE_VERSION"
 KEYCLOAK_INSTALL_DIR=$1
@@ -23,16 +23,16 @@ KEYCLOAK_VERSION="19.0.3"
 KEYCLOAK_ARCH_FILE="keycloak-$KEYCLOAK_VERSION.tar.gz"
 KEYCLOAK_DOWNLOAD_URL="https://github.com/keycloak/keycloak/releases/download/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz"
 ###########################################################################################
-echo "${YELLOW}******* Welcome to Wissance (https://wissance.com) pure server installation for monolith Java app *******${NOCOLOR}"
+echo "${YELLOW}******* Welcome to Wissance (https://wissance.com) pure server installation for monolith NET app *******${NOCOLOR}"
 echo "###################################################################################"
-# 1. Install Backend SDK Open JDK 18
-echo "${CYAN}******* Backend: Java Development Kit installation started *******${NOCOLOR}"
+# 1. Install Backend NET6 SDK
+echo "${CYAN}******* Backend: NET SDK installation started *******${NOCOLOR}"
 # todo(umv): think about java version parametrization
 add-apt-repository -y ppa:openjdk-r/ppa
-echo "${MAGENTA}Installing following JDK package(s): $JAVA_PKG ${NOCOLOR}"
+echo "${MAGENTA}Installing following NET package(s): $NET_PKG ${NOCOLOR}"
 apt-get update
-apt-get install -y $JAVA_PKG
-echo "${CYAN}******* Backend: Java Development Kit installation finished *******${NOCOLOR}"
+apt-get install -y $NET_PKG
+echo "${CYAN}******* Backend: NET SDK installation finished *******${NOCOLOR}"
 echo "###################################################################################"
 # 2. Install NodeJs and npm
 echo "${CYAN}******* Frontend: NodeJS && Npm installation started *******${NOCOLOR}"
@@ -76,14 +76,18 @@ fi
 echo "${CYAN}******* Authorization Server: Keycloak installation finished *******${NOCOLOR}"
 echo "###################################################################################"
 # 4.3 Elasticsearch
-echo "******* Search Engine Server: Elasticsearch installation started *******"
-curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
-echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-apt-get update
-apt-get install elasticsearch
-systemctl enable elasticsearch
-systemctl start elasticsearch
-echo "${CYAN}******* Search Engine Server: Elasticsearch installation finished *******${NOCOLOR}"
+#echo "******* Search Engine Server: Elasticsearch installation started *******"
+#curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
+#echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
+#apt-get update
+#apt-get install elasticsearch
+#systemctl enable elasticsearch
+#systemctl start elasticsearch
+#echo "${CYAN}******* Search Engine Server: Elasticsearch installation finished *******${NOCOLOR}"
+# 4.3 EdgeDB
+echo "${CYAN}******* EdgeDB installation started *******${NOCOLOR}"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh
+echo "${CYAN}******* EdgeDB installation finished *******${NOCOLOR}"
 echo "###################################################################################"
 # 4.4 Certbot
 echo "${CYAN}******* SSL: Certbot installation started *******${NOCOLOR}"
