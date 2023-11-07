@@ -1,6 +1,6 @@
 ﻿#!/bin/bash
 # IMPORTANT NOTES: If you edit in any text editor ensure that ALL lines ends witn \n (LF) NOT a \r\n (CRLF),  
-# otherwise it won't work!
+# otherwise it won't work! (BE CAREFUL)!
 # This script MUST be run with sudo
 # args: $1 - download install dir or if missing default to /usr/local/sbin/keycloak
 # OS: Ubuntu 22.04 

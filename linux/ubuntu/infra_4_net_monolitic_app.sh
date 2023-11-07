@@ -16,6 +16,8 @@ GREEN='\x1b[32;1m'
 CURRENT_DIRECTORY=$(pwd)
 NET_VERSION="6"
 NET_PKG="dotnet$NET_VERSION"
+JAVA_VERSION="18"
+JAVA_PKG="openjdk-$JAVA_VERSION-jdk"
 NODE_VERSION="16.x"
 NODE_URL="https://deb.nodesource.com/setup_$NODE_VERSION"
 KEYCLOAK_INSTALL_DIR=$1
@@ -23,9 +25,10 @@ KEYCLOAK_VERSION="19.0.3"
 KEYCLOAK_ARCH_FILE="keycloak-$KEYCLOAK_VERSION.tar.gz"
 KEYCLOAK_DOWNLOAD_URL="https://github.com/keycloak/keycloak/releases/download/$KEYCLOAK_VERSION/keycloak-$KEYCLOAK_VERSION.tar.gz"
 ###########################################################################################
+# 1 Install Backend SDK
 echo "${YELLOW}******* Welcome to Wissance (https://wissance.com) pure server installation for monolith NET app *******${NOCOLOR}"
 echo "###################################################################################"
-# 1. Install Backend NET6 SDK
+# 1.1 Install Backend NET6 SDK
 echo "${CYAN}******* Backend: NET SDK installation started *******${NOCOLOR}"
 # todo(umv): think about java version parametrization
 add-apt-repository -y ppa:openjdk-r/ppa
@@ -33,6 +36,15 @@ echo "${MAGENTA}Installing following NET package(s): $NET_PKG ${NOCOLOR}"
 apt-get update
 apt-get install -y $NET_PKG
 echo "${CYAN}******* Backend: NET SDK installation finished *******${NOCOLOR}"
+echo "###################################################################################"
+# 1.2 Install Backend SDK Open JDK 18 (requires by Keycloak)
+echo "${CYAN}******* Backend: Java Development Kit installation started *******${NOCOLOR}"
+# todo(umv): think about java version parametrization
+add-apt-repository -y ppa:openjdk-r/ppa
+echo "${MAGENTA}Installing following JDK package(s): $JAVA_PKG ${NOCOLOR}"
+apt-get update
+apt-get install -y $JAVA_PKG
+echo "${CYAN}******* Backend: Java Development Kit installation finished *******${NOCOLOR}"
 echo "###################################################################################"
 # 2. Install NodeJs and npm
 echo "${CYAN}******* Frontend: NodeJS && Npm installation started *******${NOCOLOR}"
