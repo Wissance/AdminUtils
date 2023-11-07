@@ -1,7 +1,7 @@
 ﻿#!/bin/bash
 # IMPORTANT NOTES: If you edit in any text editor ensure that ALL lines ends witn \n (LF) NOT a \r\n (CRLF),  
-# otherwise it won't work!
-# This script MUST be run with sudo
+# otherwise it won't work (BE CAREFUL)!
+# This script MUST be run with sudo (you are using it on your OWN risk)
 # args: $1 - download install dir or if missing default to /usr/local/sbin/keycloak
 # OS: Ubuntu 22.04 
 ########################################### VARIABLES #####################################
