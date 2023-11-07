@@ -86,6 +86,7 @@ echo "##########################################################################
 #echo "${CYAN}******* Search Engine Server: Elasticsearch installation finished *******${NOCOLOR}"
 # 4.3 EdgeDB
 echo "${CYAN}******* EdgeDB installation started *******${NOCOLOR}"
+# EDGEDB CLI setting up for 1 user (if run with sudo - root), for other user you should specify (also it has not servers, run edgedb server install) 
 curl --proto '=https' --tlsv1.2 -sSf https://sh.edgedb.com | sh
 echo "${CYAN}******* EdgeDB installation finished *******${NOCOLOR}"
 echo "###################################################################################"
