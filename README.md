@@ -28,6 +28,11 @@ We have the following utilities:
 Currently we have one script but it insignificant (work on it will be continued)
 
 ## 2. Windows Utilities
+### 2.1 Utilities to build Choco packages
+For Create NEW Chocolatey package depends on .Net Framework we have to install it in `chocolateyinstall.ps1`, for this purpose we create following scripts:
+* `/windows/net6_installer.ps1` install `net6` runtime on target machine
+
+### 2.2 Utilities based on Choco packages
 This set of tool is located in the `windows` directory 
 Here we have the following tools for fast pure system initialization:
 * `/windows/install_common_tools.ps1` contains **common (daily) software**:
